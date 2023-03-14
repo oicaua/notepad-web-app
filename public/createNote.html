@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Style similar to Google Keep */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .note-form {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding: 20px;
+            z-index: 2;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Link to open the note form -->
+    <a href="#" id="open-note-form">Create Note</a>
+
+    <!-- Overlay to display the note form -->
+    <div class="overlay" id="note-overlay">
+        <!-- Note form -->
+        <div class="note-form" id="note-form">
+            <form>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+
+                <label for="text">Note:</label>
+                <textarea id="text" name="text" rows="10"></textarea>
+
+                <input type="submit" value="Save" id="submit-button">
+            </form>
+        </div>
+    </div>
+
+    <!-- Script to display and hide the note form -->
+    <script>
+        document.getElementById("open-note-form").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("note-overlay").style.display = "block";
+            document.getElementById("note-form").style.display = "block";
+        });
+
+        document.getElementById("note-overlay").addEventListener("click", function () {
+            document.getElementById("note-overlay").style.display = "none";
+            document.getElementById("note-form").style.display = "none";
+        });
+        document.getElementById("submit-button").addEventListener("click", function (event) {
+            event.preventDefault();
+            const title = document.getElementById("title").value;
+            const text = document.getElementById("text").value;
+            const data = { title: title, text: text, status: "standard" };
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:3000/createNotes", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(data));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("Data saved successfully");
+                    document.getElementById("note-overlay").style.display = "none";
+                    document.getElementById("note-form").style.display = "none";
+                } else {
+                    alert("Error saving data");
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

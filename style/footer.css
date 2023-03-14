@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200&family=Noto+Sans&family=Open+Sans&display=swap');
+.footerClass {
+    height: 100px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid lightgrey 1px;
+    background-color: #FAEFE3;
+}
+
+.footerClass-dark-mode {
+    color: white;
+    height: 100px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid #2c2c2c 1px;
+    background-color: #292929;
+}
