@@ -6,5 +6,3 @@
 ##### -> It includes a Dark Mode option for night readers
 ##### -> It's an on going project
 
-## See it by yourself
-##### Try it on: https://notepad-app-bycaua.netlify.app/public/
