@@ -66,6 +66,15 @@ app.use('/', router)
 // ------------------------------
 
 // Connect to the database
+const uri = "mongodb+srv://dbUser:jT7wtWWgNPUTg0Vn@clusterdatabasenotepad.tcbamgl.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
 const client = new MongoClient("mongodb://localhost:27017/", { useNewUrlParser: true });
 const jsonParser = bodyParser.json()
 
